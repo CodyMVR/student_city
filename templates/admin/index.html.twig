@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des utilisateurs{% endblock %}
+
+{% block body %}
+<h1>Gestion des comptes</h1>
+
+<table>
+  <thead>
+    <tr><th>Email</th><th>Statut</th><th>Actions</th></tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+      <tr>
+        <td>{{ user.email }}</td>
+        <td>
+          {% if user.isActive() %}
+            Activé
+          {% else %}
+            En attente
+          {% endif %}
+        </td>
+        <td>
+          {% if not user.isActive() %}
+            <form method="post" action="{{ path('admin_user_approve', {id: user.id}) }}" style="display:inline">
+              <button type="submit">Approuver</button>
+            </form>
+            <form method="post" action="{{ path('admin_user_disapprove', {id: user.id}) }}" style="display:inline">
+              <button type="submit">Refuser</button>
+            </form>
+          {% else %}
+            <form method="post" action="{{ path('admin_user_delete', {id: user.id}) }}" style="display:inline">
+              <button type="submit">Supprimer</button>
+            </form>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

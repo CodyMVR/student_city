@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+  <h1>Liste des lieux</h1>
+
+  {# Barre de recherche #}
+  <form method="get" action="{{ path('place_list') }}" style="margin-bottom:1rem;">
+    <input
+      type="text"
+      name="q"
+      value="{{ q }}"
+      placeholder="Rechercher un lieu…"
+      style="padding:0.4rem; width:200px;"
+    >
+    <button type="submit" class="btn">Rechercher</button>
+    {% if q %}
+      <a href="{{ path('place_list') }}" style="margin-left:0.5rem;">×</a>
+    {% endif %}
+  </form>
+
+  {# Bouton pour ajouter un nouveau lieu #}
+  <a href="{{ path('place_new') }}" class="btn">Ajouter un lieu</a>
+
+  <ul class="place-list">
+    {% for place in places %}
+      <li>
+        <a href="{{ path('place_show', {id: place.id}) }}">{{ place.name }}</a>
+        <span class="place-author">{{ place.author.email }}</span>
+      </li>
+    {% else %}
+      <li>Aucun lieu trouvé.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

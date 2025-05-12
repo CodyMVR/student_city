@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<h1>Gestion des lieux</h1>
+<table>
+  <thead><tr><th>Nom</th><th>Auteur</th><th>Statut</th><th>Actions</th></tr></thead>
+  <tbody>
+    {% for place in places %}
+      <tr>
+        <td>{{ place.name }}</td>
+        <td>{{ place.author.email }}</td>
+        <td>
+          {{ place.isActive() ? 'Approuvé' : 'En attente' }}
+        </td>
+        <td>
+          {% if not place.isActive() %}
+            <form action="{{ path('admin_place_approve', {id: place.id}) }}" method="post" style="display:inline">
+              <button>Approuver</button>
+            </form>
+            <form action="{{ path('admin_place_reject',  {id: place.id}) }}" method="post" style="display:inline">
+              <button>Refuser</button>
+            </form>
+          {% else %}
+            <form action="{{ path('admin_place_delete',  {id: place.id}) }}" method="post" style="display:inline">
+              <button>Supprimer</button>
+            </form>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

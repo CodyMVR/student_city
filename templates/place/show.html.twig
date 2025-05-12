@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+  <h1>{{ place.name }}</h1>
+  <p>Auteur : {{ place.author.email }}</p>
+
+  {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('admin_place_edit', {id: place.id}) }}" class="btn">Modifier le nom</a>
+  {% endif %}
+
+  <h2>Commentaires</h2>
+  <ul class="place-list">
+    {% for c in place.comments %}
+      <li>
+        <div style="display:flex; align-items:center; justify-content:space-between; width:100%;">
+          <span>{{ c.author.email }} ({{ c.rating }}/5) : {{ c.content }}</span>
+
+          {% if is_granted('ROLE_ADMIN') %}
+            <form method="post"
+                  action="{{ path('admin_comment_delete', {id: c.id}) }}"
+                  style="margin:0;">
+              <button type="submit" class="btn">Supprimer</button>
+            </form>
+          {% endif %}
+        </div>
+      </li>
+    {% else %}
+      <li>Aucun commentaire</li>
+    {% endfor %}
+  </ul>
+
+  {% if is_granted('ROLE_USER') %}
+    <h3>Ajouter un commentaire</h3>
+    {{ form_start(commentForm) }}
+      {{ form_row(commentForm.content) }}
+      {{ form_row(commentForm.rating) }}
+      <button class="btn">Envoyer</button>
+    {{ form_end(commentForm) }}
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,90 @@
+/* public/css/app.css */
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+nav {
+    background-color: #333;
+    padding: 0.5rem 1rem;
+    width: 100vw;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin-right: 1.5rem;
+}
+
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+nav ul li a,
+nav ul li button {
+    color: #f9f9f9;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+nav ul li a:hover,
+nav ul li button:hover {
+    background-color: #555;
+    border-radius: 4px;
+}
+
+nav ul li form {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+/* Liste de lieux */
+.place-list {
+    list-style: none;
+    margin: 1rem 0;
+    padding: 0;
+  }
+  
+  .place-list li {
+    background-color: #f9f9f9;
+    margin-bottom: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .place-list li a {
+    font-weight: 600;
+    color: #181818;
+    text-decoration: none;
+  }
+  
+  .place-list li a:hover {
+    text-decoration: underline;
+  }
+  
+  .place-list .place-author {
+    font-size: 0.9rem;
+    color: #262626;
+    margin-left: 0.5rem;
+  }
+  
+li {
+    color: rgb(27, 27, 27);
+}
